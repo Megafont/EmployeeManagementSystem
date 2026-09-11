@@ -3,8 +3,11 @@ var builder = WebApplication.CreateBuilder(args);
 // This service is needed for app.MapControllers() to work below.
 // You can also use builder.Services.AddControllersWithViews() instead of builder.Services.AddControllers() as
 // we're doing here to support having razor pages views connected to the controllers.
-builder.Services.AddControllersWithViews()
-	.AddXmlSerializerFormatters(); // This call enables support for Http requests containing XML data.
+builder.Services.AddControllersWithViews();
+	//.AddXmlSerializerFormatters(); // This call enables support for Http requests containing XML data.
+
+// This service is needed for the app.MapRazorPages() call below to work.
+builder.Services.AddRazorPages();
 
 
 var app = builder.Build();
@@ -31,6 +34,8 @@ app.UseRouting();
 //app.UseEndpoints(endpoints =>
 //{
 //	endpoints.MapControllers();
+//
+//	endpoints.MapRazorPages();
 //});
 
 // This is the recommended way to map all our controller classes.
@@ -43,6 +48,8 @@ app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}" // The ? means the id parameter is optional.
 );
+
+app.MapRazorPages();
 
 // NOTE: You can also enable conventional routing like this in the commented out app.UseEndpoints()
 //	     block above, though this is not the recommended approach.
