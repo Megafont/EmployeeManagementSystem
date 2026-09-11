@@ -1,0 +1,93 @@
+﻿using WebApp.Models;
+
+namespace WebApp.Repositories
+{
+	public class EmployeesRepository
+	{
+		private static List<Employee> _Employees = new List<Employee>
+		{
+			new Employee(1, "John Doe", "Engineer", 60000, 1),
+			new Employee(2, "Jane Smith", "Manager", 75000, 1),
+			new Employee(3, "Sam Brown", "Technician", 50000, 1),
+			new Employee(4, "Alice Johnson", "Analyst", 55000, 2),
+			new Employee(5, "Bob Lee", "Developer", 65000, 2),
+			new Employee(6, "Carol Wang", "Designer", 70000, 2),
+			new Employee(7, "David Kim", "Support", 48000, 3),
+			new Employee(8, "Eve Rogers", "Consultant", 72000, 3),
+			new Employee(9, "Franklin Zhang", "Architect", 80000, 3),
+			new Employee(10, "Grace Liu", "Coordinator", 53000, 1),
+			new Employee(11, "Henry Thompson", "Specialist", 62000, 2),
+			new Employee(12, "Isabelle Nguyen", "Technician", 57000, 3),
+		};
+
+		public static List<Employee> GetEmployees(string? filter = null, int? departmentId = null)
+		{
+			// This may look like a bad practice, but since we're using an in-memory repository for now, it is ok to load the department object
+			// for each employee. We'll change this later.
+			foreach (Employee employee in _Employees)
+			{
+				employee.Department = DepartmentsRepository.GetDepartmentById(employee.DepartmentId);
+			}
+
+			if (departmentId.HasValue)
+			{
+				return _Employees.Where(x => x.DepartmentId == departmentId.Value).ToList();
+			}
+			else if (!string.IsNullOrWhiteSpace(filter))
+			{
+				return _Employees.Where(x => x.Name != null && x.Name.ToLower().Contains(filter.ToLower())).ToList();
+			}
+
+			return _Employees;
+		}
+
+		public static Employee? GetEmployeeById(int id)
+		{
+			return _Employees.FirstOrDefault(x => x.Id == id);
+		}
+
+		public static void AddEmployee(Employee? employee)
+		{
+			if (employee != null)
+			{
+				int maxId = _Employees.Max(x => x.Id);
+				employee.Id = maxId + 1;
+				_Employees.Add(employee);
+			}
+		}
+
+		public static bool UpdateEmployee(Employee? employee)
+		{
+			if (employee != null)
+			{
+				var repoEntry = _Employees.FirstOrDefault(x => x.Id == employee.Id);
+				if (repoEntry != null)
+				{
+					repoEntry.Name = employee.Name;
+					repoEntry.Position = employee.Position;
+					repoEntry.Salary = employee.Salary;
+					repoEntry.DepartmentId = employee.DepartmentId;
+
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public static bool DeleteEmployee(Employee? employee)
+		{
+			if (employee != null)
+			{
+				var repoEntry = _Employees.FirstOrDefault(x => x.Id == employee.Id);
+				if (repoEntry != null)
+				{
+					_Employees.Remove(repoEntry);
+					return true;
+				}
+			}
+
+			return false;
+		}
+	}
+}

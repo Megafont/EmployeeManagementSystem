@@ -1,6 +1,7 @@
 ﻿using System.Xml.Linq;
+using WebApp.Models;
 
-namespace WebApp.Models
+namespace WebApp.Repositories
 {
     public static class DepartmentsRepository
     {
