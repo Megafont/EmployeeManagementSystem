@@ -1,0 +1,16 @@
+﻿
+@model Department
+
+@{
+    // Store the page title in the view bag so the layout file can set it as the page title.
+    ViewBag.Title = "Create Department";
+    ViewBag.Action = "create";
+}
+
+
+@section title_section
+{
+    <h3>Add Department</h3>    
+}
+
+@await Html.PartialAsync("_DepartmentDetails", @Model)

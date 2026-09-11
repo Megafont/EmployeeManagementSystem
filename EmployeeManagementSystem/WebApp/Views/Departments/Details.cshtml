@@ -1,0 +1,22 @@
+﻿
+@model Department
+
+@{
+    // Store the page title in the view bag so the layout file can set it as the page title.
+    ViewBag.Title = "Department Details";
+    ViewBag.Action = "edit";
+}
+
+
+@section title_section
+{
+    <h3>Department Details</h3>
+}
+
+
+@await Html.PartialAsync("_DepartmentDetails", @Model)
+
+<form method="post" action="/departments/delete/@Model.Id">
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+

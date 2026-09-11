@@ -1,0 +1,23 @@
+﻿@{
+    // This tells it which layout file to apply to this Razor view.
+    // Note that the _ is just a convention for layout files.
+    Layout = "/Views/Shared/_Layout.cshtml";
+    // We're supplying the path ofthe layout file since otherwise this nested layout file would reference itself, creating
+    // an infinite recursive loop. As a result. ASP.Net will throw an exception.
+}
+
+
+<h1>Department Management</h1>
+
+<br />
+
+<!--This is needed to avoid an error that would otherwise happen. This is because the page this layout file is being
+    applied to does define a section called "title_section", however, that section doesn't get rendered without
+    this call being here.
+-->
+@RenderSection("title_section", false)
+
+<br />
+
+@RenderBody()
+

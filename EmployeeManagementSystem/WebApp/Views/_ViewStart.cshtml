@@ -1,0 +1,14 @@
+﻿
+<!--This is a layout file that is executed first when any view is starting up.
+    IMPORTANT: This file must have the exact name _ViewStart.cshtml in order for it to be executed automatically.
+    This allows us to specify a layout file for all views here, rather than separately in each view file.
+    You can also have additional _ViewStart.cshtml files in subfolders. In this case, the root level
+    _ViewStart file is executed first, then the one in a subfolder.
+-->
+@{
+    // This tells it which layout file to apply to this Razor view.
+    // Note that the _ is just a convention for layout files.
+    Layout = "_Layout";
+    // This could also be written as Layout = "/Views/Departments/_Layout.cshtml"
+    // If no path is supplied, it will look for the layout file in the same folder as this view before looking in the Views/Shared folder
+}

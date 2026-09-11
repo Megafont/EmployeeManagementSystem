@@ -1,0 +1,45 @@
+﻿
+@{
+    // Store the page title in the view bag so the layout file can set it as the page title.
+    ViewBag.Title = "Home";
+
+
+    // color will be green when days left until Christmas is even, and red when it is odd.
+    var days = new DateTime(DateTime.Today.Year, 12, 25) - DateTime.Today;
+
+    // Has Christmas already passed this year? If so, calculate based on next year's Christmas.
+    if (DateTime.Today > new DateTime(DateTime.Today.Year, 12, 25))
+        days = new DateTime(DateTime.Today.Year + 1, 12, 25) - DateTime.Today;
+
+    string color = days.Days % 2 == 0 ? "green" : "red";
+}
+
+
+@if (days.Days <= 30)
+{
+    <h1 style="@color">Christmas is Around the Corner!</h1>
+    <p style="color:@(color == "green" ? "red" : "green")">Happy Holidays!</p>
+
+    <p>Only @(days.Days) days left until Christmas!</p>
+    // <p>Only @days.Days <text> days left until Christmas!</text></p>
+    // If the text starts at the beginning of the line, you can use @: to signify that the entire line is text. You can't use @: in the middle of a line, though, so you can use the <text> tag instead.
+
+            
+    @*          switch (color)
+            {
+                case "green":
+                    <h1 style = "green"> Christmas is Around the Corner!</h1>
+                    break;
+                case "red":
+                    <h1 style = "red"> Christmas is Around the Corner!</h1>
+                    break;
+            }
+ *@
+        
+}
+else
+{
+    <h1>Welcome to Department Management!</h1>
+}
+
+<a href="/departments">Manage Departments</a>

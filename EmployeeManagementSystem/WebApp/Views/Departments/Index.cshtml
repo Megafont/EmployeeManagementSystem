@@ -1,0 +1,55 @@
+﻿
+@{
+    // Store the page title in the view bag so the layout file can set it as the page title.
+    ViewBag.Title = "Departments";
+}
+
+
+@section title_section
+{
+    <h3>Departments</h3>
+}
+
+
+@await Html.PartialAsync("_SearchBar")
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="department-list">
+
+    </tbody>
+</table>
+
+<br>
+<a class="btn btn-primary" href="/departments/create">Add Department</a>
+
+
+<script>
+    // Loads the departments list when the page first loads.
+    loadDepartments('');
+
+    // Updates the departments list when the search button is clicked.
+    document.querySelector("#search-button").addEventListener("click", async () => 
+    {
+        var filter = document.querySelector("#search-filter").value;
+
+        loadDepartments(filter);
+    });
+
+    // Fetches the departments list from the endpoint.
+    async function loadDepartments(filter)
+    {
+        var response = await fetch(`/department-list/${filter}`);
+        var departmentsHTML = await response.text();
+
+        document.querySelector("#department-list").innerHTML = departmentsHTML;
+    }
+</script>
+
+

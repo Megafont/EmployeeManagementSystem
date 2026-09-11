@@ -1,0 +1,31 @@
+﻿
+<html>
+    <head>
+        <title>@ViewBag.Title</title>
+        <!--This allows us to reference bootstrap classes like btn-primary from GetBootstrap.com in the HTML below.-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    </head>
+    <body>
+        <!--This is one way to use a partial view or component here.-->
+        @await Html.PartialAsync("_Navbar")
+
+        <br/>
+
+        <div class="container">
+
+            <!-- This directive allows you to have additional placeholders beyond the RenderBody() one below.
+                 It looks in the view for a section with the specified name. The second parameter determines
+                 whether or not all Views this layout file is applied to are required to define this section or not.
+            -->
+            @RenderSection("title_section", false)
+
+            <br/>
+
+            @RenderBody()
+
+        </div>
+
+        <!--This script tag is from www.GetBootstrap.com on the downloads page. It is needed for the navbar's dropdown menu to work. The navbar is also from this website.-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    </body>
+</html>

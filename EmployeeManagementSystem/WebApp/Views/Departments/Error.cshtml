@@ -1,0 +1,24 @@
+﻿
+@model List<string>
+
+@{
+    // Store the page title in the view bag so the layout file can set it as the page title.
+    ViewBag.Title = "Error";
+}
+
+
+@section title_section
+{
+    <h1 style="color:red">Error@(Model != null && Model.Count > 1 ? "s" : ""):</h1>
+}
+
+
+<ul>
+    @if (Model is not null && Model.Count > 0)
+    {
+        foreach (var errorMsg in Model)
+        {
+            <li style="color:darkred">@errorMsg</li>
+        }
+    }
+</ul>
