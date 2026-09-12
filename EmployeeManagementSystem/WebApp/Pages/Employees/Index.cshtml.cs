@@ -11,7 +11,14 @@ namespace WebApp.Pages.Employees
 
         public void OnGet()
         {
-	        Employees = EmployeesRepository.GetEmployees();
+            // This is no longer needed, since the employees list is loaded by the javascript in
+            // Pages/Shared/Components/EmployeeList/Default.cshtml.
+	        //Employees = EmployeesRepository.GetEmployees();
+        }
+
+        public IActionResult OnGetSearchEmployeesResult(string? filter)
+        {
+	        return ViewComponent("EmployeeList", new { filter });
         }
     }
 }

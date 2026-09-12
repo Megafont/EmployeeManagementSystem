@@ -29,27 +29,31 @@
 <br>
 <a class="btn btn-primary" href="/departments/create">Add Department</a>
 
+<!--We moved this script into a scripts section so that the layout file can ensure this script always appears at the bottom of the page so all
+    page elements will be loaded in before it runs this script.
+-->
+@section scripts
+{
+     <script>
+        // Loads the departments list when the page first loads.
+        loadDepartments('');
 
-<script>
-    // Loads the departments list when the page first loads.
-    loadDepartments('');
+        // Updates the departments list when the search button is clicked.
+        document.querySelector("#search-button").addEventListener("click", async () => 
+        {
+            var filter = document.querySelector("#search-filter").value;
 
-    // Updates the departments list when the search button is clicked.
-    document.querySelector("#search-button").addEventListener("click", async () => 
-    {
-        var filter = document.querySelector("#search-filter").value;
+            loadDepartments(filter);
+        });
 
-        loadDepartments(filter);
-    });
+        // Fetches the departments list from the endpoint.
+        async function loadDepartments(filter)
+        {
+            var response = await fetch(`/department-list/${filter}`);
+            var departmentsHTML = await response.text();
 
-    // Fetches the departments list from the endpoint.
-    async function loadDepartments(filter)
-    {
-        var response = await fetch(`/department-list/${filter}`);
-        var departmentsHTML = await response.text();
+            document.querySelector("#department-list").innerHTML = departmentsHTML;
+        }
+    </script>
 
-        document.querySelector("#department-list").innerHTML = departmentsHTML;
-    }
-</script>
-
-
+}

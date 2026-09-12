@@ -19,45 +19,39 @@
     </tr>
     </thead>
     <tbody id="employee-list">
-        @if (Model.Employees != null && Model.Employees.Count > 0)
-        {
-            foreach (var employee in Model.Employees)
-            {
-                <tr>
-                    <td>@employee.Name</td>
-                    <td>@employee.Position</td>
-                    <td>@employee.Salary</td>
-                    <td><a class="btn btn-link" href="/departments/details/@employee.DepartmentId">@employee.Department?.Name</a></td>
-                    <td><a class="btn btn-link" href="/employees/edit/@employee.Id">Edit</a></td>
-                </tr>
-            }
-        }
+        <!--This is commented out since it is no longer in use. The list is filled in by the javascript below instead.-->
+        @* @await Component.InvokeAsync("EmployeeList") *@
     </tbody>
 </table>
 
 <br>
 <a class="btn btn-primary" href="/employees/create">Add Employee</a>
 
-@* 
-<script>
-    // Loads the departments list when the page first loads.
-    loadDepartments('');
 
-    // Updates the departments list when the search button is clicked.
-    document.querySelector("#search-button").addEventListener("click", async () => 
-    {
-        var filter = document.querySelector("#search-filter").value;
+<!--We moved this script into a scripts section so that the layout file can ensure this script always appears at the bottom of the page so all
+page elements will be loaded in before it runs this script.
+-->
+@section scripts
+{
+    <script>
+        // Loads the employee list when the page first loads.
+        loadEmployees('');
+        
+        // Updates the departments list when the search button is clicked.
+        document.querySelector("#search-button").addEventListener("click", async () => 
+        {
+            var filter = document.querySelector("#search-filter").value;
 
-        loadDepartments(filter);
-    });
+            loadEmployees(filter);
+        });
 
-    // Fetches the departments list from the endpoint.
-    async function loadDepartments(filter)
-    {
-        var response = await fetch(`/department-list/${filter}`);
-        var departmentsHTML = await response.text();
+        // Fetches the departments list from the endpoint.
+        async function loadEmployees(filter) {
+            var response = await fetch(`/employees?filter=${filter}&handler=SearchEmployeesResult`);
+            var employeesHTML = await response.text();
 
-        document.querySelector("#department-list").innerHTML = departmentsHTML;
-    }
-</script>
- *@
+            document.querySelector("#employee-list").innerHTML = employeesHTML;
+        }
+    </script>
+
+}
