@@ -33,7 +33,13 @@
             <a class="btn btn-secondary" href="/departments">Cancel</a>
         </div>
         <div class="col-4">
+            @if (ViewBag.Action == "edit")
+            {
+                <a href="/employees/departmentemployees/@Model.Id" class ="btn btn-link">Check Employees</a>
+            }
         </div>
 
     </div>
 </form>
+
+<br>
