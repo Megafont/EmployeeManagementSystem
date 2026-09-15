@@ -7,7 +7,11 @@
         <td>@Model.Name</td>
         <td>@Model.Position</td>
         <td>@Model.Salary</td>
-        <td><a class="btn btn-link" href="/departments/details/@Model.DepartmentId">@Model.Department?.Name</a></td>
-        <td><a class="btn btn-link" href="/employees/edit/@Model.Id">Edit</a></td>
+        <!--I removed the class attribute in the following two lines, as it was responsible for the links being a bit lower than the text in other columns.
+            The original value of the class attribute was:
+            class="btn btn-link"
+        -->
+        <td><a href="/departments/details/@Model.DepartmentId">@Model.Department?.Name</a></td>
+        <td><a href="/employees/edit/@Model.Id">Edit</a></td>
     </tr>
 }

@@ -1,6 +1,7 @@
 ﻿using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using WebApp.Helpers;
 using WebApp.Models;
 using WebApp.Repositories;
 
@@ -62,7 +63,7 @@ namespace WebApp.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				return View("Error", GetErrors());
+				return View("Error", ModelStateHelper.GetErrors(ModelState));
 			}
 
 
@@ -88,7 +89,7 @@ namespace WebApp.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				return View("Error", GetErrors());
+				return View("Error", ModelStateHelper.GetErrors(ModelState));
 			}
 
 			DepartmentsRepository.AddDepartment(department);
@@ -106,7 +107,7 @@ namespace WebApp.Controllers
 			{
 				ModelState.AddModelError("id", "Department not found!");
 
-				return View("Error", GetErrors());
+				return View("Error", ModelStateHelper.GetErrors(ModelState));
 			}
 
 
@@ -115,39 +116,5 @@ namespace WebApp.Controllers
 			return RedirectToAction(nameof(Index));
 		}
 
-		private List<string> GetErrors()
-		{
-			List<string> errorMessages = new List<string>();
-
-			// Get the error messages from the model state.
-			foreach (var value in ModelState.Values)
-			{
-				foreach (var error in value.Errors)
-				{
-					errorMessages.Add(error.ErrorMessage);
-				}
-			}
-
-
-			return errorMessages;
-		}
-
-		private string GetErrorsAsHTML()
-		{
-			List<string> errorMessages = GetErrors();
-
-
-			// Format the error messages in HTML.
-			string html = string.Empty;
-			if (errorMessages.Count > 0)
-			{
-				html = $@"
-					<ul>
-						{string.Join("", errorMessages.Select(error => $"<li style='color:red;'>{error}</li>"))}		
-					</ul>";
-			}
-
-			return html;
-		}
 	}
 }
