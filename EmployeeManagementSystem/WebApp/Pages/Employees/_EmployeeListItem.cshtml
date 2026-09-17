@@ -7,11 +7,25 @@
         <td>@Model.Name</td>
         <td>@Model.Position</td>
         <td>@Model.Salary</td>
-        <!--I removed the class attribute in the following two lines, as it was responsible for the links being a bit lower than the text in other columns.
-            The original value of the class attribute was:
-            class="btn btn-link"
-        -->
-        <td><a href="/departments/details/@Model.DepartmentId">@Model.Department?.Name</a></td>
-        <td><a href="/employees/edit/@Model.Id">Edit</a></td>
+        <!--I removed the class attribute in the <a> tags in the following two <td> blocks, as it was responsible for the links being a bit lower than the text in other columns.
+        The original value of the class attribute was:
+        class="btn btn-link" -->
+       
+        <td>
+            <!-- This line was replaced to use asp.net tag helpers instead to auto-generate the link address
+                <a href="/departments/details/@Model.DepartmentId">@Model.Department?.Name</a> -->
+            <a asp-controller="Departments"
+               asp-action="Details"
+               asp-route-id="@Model.DepartmentId">@Model.Department?.Name</a>
+        </td>
+        <td>
+            <!-- This line was replaced to use asp.net tag helpers instead to auto-generate the link address
+            -->
+            <!-- This line was replaced to use asp.net tag helpers instead to auto-generate the link address
+                <a href="/employees/edit/@Model.Id">Edit</a> -->
+            <a class="btn btn-primary"
+               asp-page="/employees/edit"
+               asp-route-id="@Model.Id">Edit</a>
+        </td>
     </tr>
 }

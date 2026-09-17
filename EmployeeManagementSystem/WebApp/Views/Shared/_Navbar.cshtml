@@ -8,13 +8,23 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                    <!-- This line was replaced to use asp.net tag helpers instead to auto-generate the link address
+                        <a class="nav-link" aria-current="page" href="/">Home</a> -->
+                    <a class="nav-link" aria-current="page" asp-controller="Home" asp-action="Index">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/departments">Departments</a>
+                    <!-- This line was replaced to use asp.net tag helpers instead to auto-generate the link address
+                        <a class="nav-link" href="/departments">Departments</a> -->
+                    <a class="nav-link" asp-controller="Departments" asp-action="Index">Departments</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/employees">Employees</a>
+                    <!-- This line was replaced to use asp.net tag helpers instead to auto-generate the link address
+                    <a class="nav-link" href="/employees">Employees</a> -->
+                    <a class="nav-link" asp-page="/employees/index">Employees</a>
+                    
+                    <!--NOTE: If you need to specify which handler to call using tag helpers, there is another tag helper called asp-page-handler for this.
+                        For example, we could say asp-page-handler="Test" in the employees link above to target the empty test handler we added there.
+                    -->
                 </li>
             </ul>
         </div>

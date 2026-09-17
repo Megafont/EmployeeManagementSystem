@@ -16,6 +16,11 @@ namespace WebApp.Pages.Employees
 	        //Employees = EmployeesRepository.GetEmployees();
         }
 
+        public void OnGetTest()
+        {
+            Console.WriteLine("OnGetTest hit!");
+        }
+
         public IActionResult OnGetSearchEmployeesResult(string? filter)
         {
 	        return ViewComponent("EmployeeList", new { filter });

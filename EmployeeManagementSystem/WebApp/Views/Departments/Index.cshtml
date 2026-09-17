@@ -27,7 +27,12 @@
 </table>
 
 <br>
-<a class="btn btn-primary" href="/departments/create">Add Department</a>
+
+<!-- This line was replaced to use asp.net tag helpers instead to auto-generate the link address
+    <a class="btn btn-primary" href="/departments/create">Add Department</a> -->
+<a class="btn btn-primary"
+   asp-controller="Departments"
+   asp-action="Create">Add</a>
 
 <!--We moved this script into a scripts section so that the layout file can ensure this script always appears at the bottom of the page so all
     page elements will be loaded in before it runs this script.

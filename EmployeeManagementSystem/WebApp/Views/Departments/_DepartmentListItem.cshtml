@@ -7,7 +7,16 @@
     <tr>
         <td>@Model.Name</td>
         <td>@Model.Description</td>
-        <td><a class="btn btn-secondary" href="/departments/details/@Model.Id">Edit</a></td>
+        <td>
+            <!-- This line was replaced to use asp.net tag helpers instead to auto-generate the link address
+                <a class="btn btn-secondary" href="/departments/details/@Model.Id">Edit</a> -->
+            <a class="btn btn-link"
+               asp-controller="Departments"
+               asp-action="Details"
+               asp-route-id="@Model.Id">Edit</a>
+            <!-- You can add asp-route- and put anything after it. If the specified action does not have a parameter with that name, it will add one
+                 in the query string of the URL. You can have multiple asp-route- tag helpers here.-->
+        </td>
         <td>
             <form method="post" action="/departments/delete/@Model.Id">
                 <button type="submit" class="btn btn-danger">Delete</button>
