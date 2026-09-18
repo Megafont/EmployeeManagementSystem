@@ -18,6 +18,8 @@
         <tr>
             <th>Name</th>
             <th>Description</th>
+            <th>Email</th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -44,7 +46,7 @@
         loadDepartments('');
 
         // Updates the departments list when the search button is clicked.
-        document.querySelector("#search-button").addEventListener("click", async () => 
+        document.querySelector("#search-button").addEventListener("click", async () =>
         {
             var filter = document.querySelector("#search-filter").value;
 
@@ -59,6 +61,23 @@
 
             document.querySelector("#department-list").innerHTML = departmentsHTML;
         }
+
+        // Uses event delegation on the table body so that delete confirmation
+        // works on dynamically loaded rows. Since the rows are injected via
+        // innerHTML (which strips <script> tags), we can't attach listeners
+        // inside the partial — we attach them here on the parent container.
+        document.querySelector("#department-list").addEventListener("click", (event) => {
+            const btn = event.target.closest(".delete-department-btn");
+            if (!btn) return;
+
+            event.preventDefault(); // Prevents the default form submission. We will trigger it below once the user confirms the delete action.
+
+            const departmentName = btn.dataset.departmentName;
+
+            const userConfirmation = confirm(`Are you sure you want to delete department '${departmentName}'?`);
+            if (userConfirmation)
+                btn.closest("form").submit();
+        });
     </script>
 
 }

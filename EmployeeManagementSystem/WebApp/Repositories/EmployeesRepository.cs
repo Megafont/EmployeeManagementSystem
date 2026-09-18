@@ -1,4 +1,5 @@
-﻿using WebApp.Models;
+﻿using System.Reflection;
+using WebApp.Models;
 
 namespace WebApp.Repositories
 {
@@ -6,18 +7,18 @@ namespace WebApp.Repositories
 	{
 		private static List<Employee> _Employees = new List<Employee>
 		{
-			new Employee(1, "John Doe", "Engineer", 60000, 1),
-			new Employee(2, "Jane Smith", "Manager", 75000, 1),
-			new Employee(3, "Sam Brown", "Technician", 50000, 1),
-			new Employee(4, "Alice Johnson", "Analyst", 55000, 2),
-			new Employee(5, "Bob Lee", "Developer", 65000, 2),
-			new Employee(6, "Carol Wang", "Designer", 70000, 2),
-			new Employee(7, "David Kim", "Support", 48000, 3),
-			new Employee(8, "Eve Rogers", "Consultant", 72000, 3),
-			new Employee(9, "Franklin Zhang", "Architect", 80000, 3),
-			new Employee(10, "Grace Liu", "Coordinator", 53000, 1),
-			new Employee(11, "Henry Thompson", "Specialist", 62000, 2),
-			new Employee(12, "Isabelle Nguyen", "Technician", 57000, 3),
+			new Employee(1, "John Doe", "Engineer", 60000, 1, "johndoe@company.com"),
+			new Employee(2, "Jane Smith", "Manager", 75000, 1, "janesmith@company.com"),
+			new Employee(3, "Sam Brown", "Technician", 50000, 1, "sambrown@company.com"),
+			new Employee(4, "Alice Johnson", "Analyst", 55000, 2, "alicejohnson@company.com"),
+			new Employee(5, "Bob Lee", "Developer", 65000, 2, "boblee@company.com"),
+			new Employee(6, "Carol Wang", "Designer", 70000, 2, "carolwang@company.com"),
+			new Employee(7, "David Kim", "Support", 48000, 3, "davidkim@company.com"),
+			new Employee(8, "Eve Rogers", "Consultant", 72000, 3, "everogers@company.com"),
+			new Employee(9, "Franklin Zhang", "Architect", 80000, 3, "franklinzhang@company.com"),
+			new Employee(10, "Grace Liu", "Coordinator", 53000, 1, "graceliu@company.com"),
+			new Employee(11, "Henry Thompson", "Specialist", 62000, 2, "henrythompson@company.com"),
+			new Employee(12, "Isabelle Nguyen", "Technician", 57000, 3, "isabellenguyen@company.com"),
 		};
 
 		public static List<Employee> GetEmployees(string? filter = null, int? departmentId = null)
@@ -67,6 +68,7 @@ namespace WebApp.Repositories
 					repoEntry.Position = employee.Position;
 					repoEntry.Salary = employee.Salary;
 					repoEntry.DepartmentId = employee.DepartmentId;
+					repoEntry.Email = employee.Email;
 
 					return true;
 				}

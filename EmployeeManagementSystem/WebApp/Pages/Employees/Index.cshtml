@@ -15,6 +15,8 @@
         <th>Position</th>
         <th>Salary</th>
         <th>Department</th>
+        <th>Email</th>
+        <th></th>
         <th></th>
     </tr>
     </thead>
@@ -54,6 +56,23 @@ page elements will be loaded in before it runs this script.
 
             document.querySelector("#employee-list").innerHTML = employeesHTML;
         }
+
+        // Uses event delegation on the table body so that delete confirmation
+        // works on dynamically loaded rows. Since the rows are injected via
+        // innerHTML (which strips <script> tags), we can't attach listeners
+        // inside the partial, so we attach them here on the parent container.
+        document.querySelector("#employee-list").addEventListener("click", (event) => {
+            const btn = event.target.closest(".delete-employee-btn");
+            if (!btn) return;
+
+            event.preventDefault(); // Prevents the default form submission. We will trigger it below once the user confirms the delete action.
+
+            const employeeName = btn.dataset.employeeName;
+
+            const userConfirmation = confirm(`Are you sure you want to delete employee '${employeeName}'?`);
+            if (userConfirmation)
+                btn.closest("form").submit();
+        });
     </script>
 
 }

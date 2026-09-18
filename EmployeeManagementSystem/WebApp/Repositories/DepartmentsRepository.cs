@@ -1,4 +1,6 @@
-﻿using System.Xml.Linq;
+﻿using System.Reflection;
+using System.Security.AccessControl;
+using System.Xml.Linq;
 using WebApp.Models;
 
 namespace WebApp.Repositories
@@ -7,10 +9,10 @@ namespace WebApp.Repositories
     {
         private static List<Department> _Departments = new List<Department>
         {
-            new Department(1, "Sales", "Sales Department"),
-            new Department(2, "Engineering", "Engineering Department"),
-            new Department(3, "QA", "Quality Assurance Department"),
-            new Department(4, "IT", "IT Department"),
+            new Department(1, "Sales", "Sales Department", "sales@company.com"),
+            new Department(2, "Engineering", "Engineering Department", "engineering@company.com"),
+            new Department(3, "QA", "Quality Assurance Department", "qa@company.com"),
+            new Department(4, "IT", "IT Department", "it@company.com"),
         };
 
         public static List<Department> GetDepartments(string? filter = null)
@@ -52,7 +54,8 @@ namespace WebApp.Repositories
                 if (emp is not null)
                 {
                     emp.Name = Department.Name;
-                    emp.Description = Department.Description;                   
+                    emp.Description = Department.Description;
+                    emp.Email = Department.Email;
 
                     return true;
                 }

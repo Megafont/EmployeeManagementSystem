@@ -1,27 +1,49 @@
 ﻿@model Department
 
 
-<form method="post" action="/departments/@ViewBag.Action">
+<form method="post" 
+      asp-controller="Departments"
+      asp-action="@ViewBag.Action" >
+
     @if (ViewBag.Action == "edit")
     {
-        <input type="hidden" name="Id" value="@Model.Id"/>
+        <!-- This line was changed to replace the type, name, and value attributes with a single asp-for attribute.
+            <input type="hidden" name="Id" value="@Model.Id"/> -->
+        <input asp-for="Id"/>
     }
 
     <div class="row mb-3">
         <div class="col-2">
-            <label class="col-form-label">Name</label>
+            <!-- This line was changed to use the asp-for attribute.
+                <label class="col-form-label">Name</label> -->
+            <label class="col-form-label" asp-for="Name"></label>
         </div>
         <div class="col-6">
-            <input type="text" name="Name" value="@Model.Name" class="form-control"/>
+            <!-- This line was changed to replace the type, name, and value attributes with a single asp-for attribute.
+                <input type="text" name="Name" value="@Model.Name" class="form-control"/> -->
+            <input class="form-control" asp-for="Name" />
         </div>
     </div>
 
     <div class="row mb-3">
         <div class="col-2">
-            <label class="col-form-label">Description</label>
+            <!-- This line was changed to use the asp-for attribute.
+                <label class="col-form-label">Description</label> -->
+            <label class="col-form-label" asp-for="Description"></label>
         </div>
         <div class="col-6">
-            <input type="text" name="Description" value="@Model.Description" class="form-control"/>
+            <!-- This line was changed to replace the type, name, and value attributes with a single asp-for attribute.
+                <input type="text" name="Description" value="@Model.Description" class="form-control"/> -->
+            <input class="form-control" asp-for="Description">
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <div class="col-2">
+            <label class="col-form-label" asp-for="Email"></label>
+        </div>
+        <div class="col-6">
+            <input class="form-control" asp-for="Email" />
         </div>
     </div>
 

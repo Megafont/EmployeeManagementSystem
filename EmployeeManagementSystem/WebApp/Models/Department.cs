@@ -10,13 +10,17 @@ namespace WebApp.Models
             
         }
 
-        public Department(int id, string name, string? description = "")
+        public Department(int id, string name, string? description = "", string? email = "")
         {
             this.Id = id;
             this.Name = name;
             this.Description = description;
+            this.Email = email;
         }
 
+        // Since we've updated our HTML input tags to use the asp-for attribute, we need to add this HiddenInput attribute.
+        // That way it nose Id should be a hidden field on the HTML form.
+        [HiddenInput]
         public int Id { get; set; }
 
         [Required]
@@ -24,5 +28,9 @@ namespace WebApp.Models
 
         [StringLength(500)]
         public string? Description { get; set; }
+
+        [EmailAddress]
+        // [Display(Name = "Email Address")]  // This attribute lets us set the text to display for this fields label in the HTML form since we changed the label tags to also use the asp-for attribute.
+        public string? Email { get; set; }
     }
 }

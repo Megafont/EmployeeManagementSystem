@@ -15,11 +15,16 @@
 <form 
     name="deleteEmployeeForm"
     method="post"
-    action="/employees/edit/@Model.EmployeeViewModel.Employee.Id?handler=DeleteEmployee">
+    asp-page="/employees/edit"
+    asp-route-id="@Model.EmployeeViewModel.Employee.Id"
+    asp-page-handler="DeleteEmployee" >
+
+    <!--This adds an anti-forgery token that ensures a post from this form actually came from us and not a hacker somewhere.
+        @Html.AntiForgeryToken()
     
-    <!--This adds an anti-forgery token that ensures a post from this form actually came from us and not a hacker somewhere.-->
-    @Html.AntiForgeryToken()
-    
+        This is now commented out, because the asp-page tag helper we just added above does this for us as well.
+    -->
+
     <button type="submit" id="delete-employee" class="btn btn-danger">Delete</button>
 
 </form>
@@ -33,7 +38,7 @@
 
             const employeeName = '@Model.EmployeeViewModel.Employee.Name';
 
-            const userConfirmation = confirm(`Are you sure you want to delete employee ${employeeName}?`);
+            const userConfirmation = confirm(`Are you sure you want to delete employee '${employeeName}'?`);
             if (userConfirmation)
                 document.forms["deleteEmployeeForm"].submit();
 

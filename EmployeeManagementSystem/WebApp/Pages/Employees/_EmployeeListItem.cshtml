@@ -13,19 +13,23 @@
        
         <td>
             <!-- This line was replaced to use asp.net tag helpers instead to auto-generate the link address
-                <a href="/departments/details/@Model.DepartmentId">@Model.Department?.Name</a> -->
+            <a href="/departments/details/@Model.Id">@Model.Name</a> -->
             <a asp-controller="Departments"
                asp-action="Details"
-               asp-route-id="@Model.DepartmentId">@Model.Department?.Name</a>
+               asp-route-id="@Model.DepartmentId">@DepartmentsRepository.GetDepartmentById(Model.DepartmentId)?.Name</a>
         </td>
+        <td>@Model.Email</td>
         <td>
-            <!-- This line was replaced to use asp.net tag helpers instead to auto-generate the link address
-            -->
             <!-- This line was replaced to use asp.net tag helpers instead to auto-generate the link address
                 <a href="/employees/edit/@Model.Id">Edit</a> -->
             <a class="btn btn-primary"
                asp-page="/employees/edit"
                asp-route-id="@Model.Id">Edit</a>
+        </td>
+        <td>
+            <form method="post" asp-page="/employees/index" asp-page-handler="DeleteEmployee" asp-route-id="@Model.Id">
+                <button type="submit" class="btn btn-danger delete-employee-btn" data-employee-name="@Model.Name">Delete</button>
+            </form>
         </td>
     </tr>
 }

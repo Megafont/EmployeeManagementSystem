@@ -6,47 +6,69 @@
     <!--We don't have to pass the action (edit or create) back to the caller in this form, since we're using Razor Pages for the employees
         side of the app. The form just gets submitted back to the same razor page that called it via the corresponding post handler in
         that page's code behind.
+        
+        NOTE: We are not using tag helpers like asp-controller in this form tag, since this form posts back to itself when submitted.
+              As such, we don't need to use any tag helpers.
     -->
     <form method="post">
         <!--This adds an anti-forgery token that ensures a post from this form actually came from us and not a hacker somewhere.-->
         @Html.AntiForgeryToken()
-
-        <input type="hidden" name="Employee.Id" value="@Model.Employee.Id" />
+        
+        <!-- This line was changed to replace the type, name, and value attributes with a single asp-for attribute.
+            <input type="hidden" name="Employee.Id" value="@Model.Employee.Id" /> -->
+        <input type="hidden" asp-for="Employee.Id" />
 
         <div class="row mb-3">
             <div class="col-2">
-                <label class="col=form-label">Name</label>
+                <!-- This line was changed to use the asp-for attribute.
+                    <label class="col=form-label">Name</label> -->
+                <label class="col=form-label" asp-for="Employee.Name"></label>
             </div>
             <div class="col-6">
-                <input type="text" name="Employee.Name" value="@Model.Employee.Name" class="form-control" />
+                <!-- This line was changed to replace the type, name, and value attributes with a single asp-for attribute.
+                    <input type="text" name="Employee.Name" value="@Model.Employee.Name" class="form-control"/> -->
+                <input class="form-control" asp-for="Employee.Name"/> 
             </div>
         </div>
 
         <div class="row mb-3">
             <div class="col-2">
-                <label class="col=form-label">Position</label>
+                <!-- This line was changed to use the asp-for attribute.
+                    <label class="col=form-label">Position</label> -->
+                <label class="col=form-label" asp-for="Employee.Position"></label>
             </div>
             <div class="col-6">
-                <input type="text" name="Employee.Position" value="@Model.Employee.Position" class="form-control" />
+                <!-- This line was changed to replace the type, name, and value attributes with a single asp-for attribute.
+                    <input type="text" name="Employee.Position" value="@Model.Employee.Position" class="form-control"/> -->
+                <input class="form-control" asp-for="Employee.Position"/>
             </div>
         </div>
         
         <div class="row mb-3">
             <div class="col-2">
-                <label class="col=form-label">Salary</label>
+                <!-- This line was changed to use the asp-for attribute.
+                    <label class="col=form-label">Salary</label> -->
+                <label class="col=form-label" asp-for="Employee.Salary"></label>
             </div>
             <div class="col-6">
-                <input type="number" name="Employee.Salary" value="@Model.Employee.Salary" class="form-control" />
+                <!-- This line was changed to replace the type, name, and value attributes with a single asp-for attribute.
+                    <input type="number" name="Employee.Salary" value="@Model.Employee.Salary" class="form-control"/> -->
+                <input class="form-control" asp-for="Employee.Salary"/>
             </div>
         </div>
 
         <div class="row mb-3">
             <div class="col-2">
-                <label class="col=form-label">Department</label>
+                <!-- This line was changed to use the asp-for attribute.
+                <label class="col=form-label">Department</label> -->
+                <label class="col=form-label" asp-for="Employee.DepartmentId"></label>
             </div>
             <div class="col-6">
-                <select name="Employee.DepartmentId" class="form-control">
-                    
+    
+                <!-- This line was changed to use the asp-for attribute.
+                <select name="Employee.DepartmentId" class="form-control"> -->
+                <select class="form-control" asp-for="Employee.DepartmentId">
+
                     @if (Model.Departments != null)
                     {
                         @if (ViewBag.Action == "create")
@@ -81,22 +103,31 @@
 
                 </select>
             </div>
+        </div>
 
-            <div class="row mb-3">
-                <div class="col-1">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-                <div class="col-1">
-                    <!-- This line was replaced to use asp.net tag helpers instead to auto-generate the link address
-                        <a class="btn btn-secondary" href="/employees">Cancel</a> -->
-                    <a class="btn btn-primary" 
-                       asp-page="/employees/index">Cancel</a>
-                </div>
-                <div class="col-4">
+        <div class="row mb-3">
+            <div class="col-2">
+                <label class="col-form-label" asp-for="Employee.Email"></label>
+            </div>
+            <div class="col-6">
+                <input class="form-control" asp-for="Employee.Email" />
+            </div>
+        </div>
 
-                </div>
+        <div class="row mb-3">
+            <div class="col-1">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+            <div class="col-1">
+                <!-- This line was replaced to use asp.net tag helpers instead to auto-generate the link address
+                    <a class="btn btn-secondary" href="/employees">Cancel</a> -->
+                <a class="btn btn-primary" 
+                   asp-page="/employees/index">Cancel</a>
+            </div>
+            <div class="col-4">
 
             </div>
+
         </div>
     </form>
 }

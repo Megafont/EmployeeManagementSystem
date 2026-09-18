@@ -25,5 +25,15 @@ namespace WebApp.Pages.Employees
         {
 	        return ViewComponent("EmployeeList", new { filter });
         }
+
+        public IActionResult OnPostDeleteEmployee(int id)
+        {
+	        Employee employee = EmployeesRepository.GetEmployeeById(id);
+
+            if (employee != null)
+				EmployeesRepository.DeleteEmployee(employee);
+
+            return RedirectToPage();
+        }
     }
 }

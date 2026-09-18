@@ -1,6 +1,7 @@
 ﻿
 @model List<WebApp.Models.Department>
 
+<!-- NOTE: This partial view is not currently being used. This is because we changed it to use javascript to populate the departments list in Views/Departments/Index.cshtml. -->
 
 @if (Model is not null && Model.Count > 0)
 {
@@ -9,6 +10,7 @@
         <tr>
             <th>Name</th>
             <th>Description</th>
+            <td>Email</td>
             <th></th>
             <th></th>
         </tr>
