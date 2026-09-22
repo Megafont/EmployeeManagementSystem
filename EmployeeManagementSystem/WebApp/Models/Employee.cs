@@ -8,8 +8,10 @@ namespace WebApp.Models
 		// Since we've updated our HTML input tags to use the asp-for attribute, we need to add this HiddenInput attribute.
 		// That way it nose Id should be a hidden field on the HTML form.
 		[HiddenInput]
-		public int Id { get; set; }
+		public long Id { get; set; }
 
+		// NOTE: For the [Required] attribute and all validation attributes like [StringLength], you can also override the default error message with your own
+		//       by specifying a value for the ErrorMessage param, like this: [StringLength(500, ErrorMessage="This is my custom error message")]
 		[Required]
 		public string? Name { get; set; }
 
@@ -23,7 +25,8 @@ namespace WebApp.Models
 		public string? Email { get; set; }
 
 		[Display(Name = "Department")]
-		public int DepartmentId { get; set; }
+		[Range(1, long.MaxValue, ErrorMessage="The department is required.")]
+		public long DepartmentId { get; set; }
 
 		// In Entity Framework, this would be called a Navigation property.
 		public Department? Department { get; set; }
@@ -34,7 +37,7 @@ namespace WebApp.Models
 
 		}
 
-		public Employee(int id, string name, string position, decimal salary, int departmentId, string? email)
+		public Employee(long id, string name, string position, decimal salary, long departmentId, string? email)
 		{
 			Id = id;
 			Name = name;

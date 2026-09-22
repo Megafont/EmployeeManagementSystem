@@ -12,6 +12,18 @@ builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
+// This middleware allows us to use static files in the wwwroot folder.
+app.UseStaticFiles(new StaticFileOptions 
+{
+	OnPrepareResponse = ctx =>
+	{
+		// These settings are enabling browser caching on our website.
+		ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=600");
+		ctx.Context.Response.Headers.Append("Expires", DateTime.UtcNow.AddMinutes(10).ToString());
+	}
+});
+
+
 app.UseRouting();
 
 

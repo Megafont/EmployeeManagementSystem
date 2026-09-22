@@ -41,7 +41,7 @@ namespace WebApp.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult Details(int id)
+		public IActionResult Details(long id)
 		{
 			var department = DepartmentsRepository.GetDepartmentById(id);
 			if (department == null)
@@ -99,7 +99,7 @@ namespace WebApp.Controllers
 		}
 
 		[HttpPost] // This is Post instead of Delete because HTML forms only support Get and Post.
-		public IActionResult Delete(int id)
+		public IActionResult Delete(long id)
 		{
 			Department department = DepartmentsRepository.GetDepartmentById(id);
 

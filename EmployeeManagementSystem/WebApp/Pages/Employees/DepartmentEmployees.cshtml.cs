@@ -9,7 +9,7 @@ namespace WebApp.Pages.Employees
         public string? DepartmentName { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public int? DepartmentId { get; set; }
+        public long? DepartmentId { get; set; }
 
 
         public void OnGet()

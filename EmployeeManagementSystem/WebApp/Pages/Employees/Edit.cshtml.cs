@@ -13,7 +13,7 @@ namespace WebApp.Pages.Employees
 		public EmployeeViewModel? EmployeeViewModel { get; set; }
 
 
-        public void OnGet(int id)
+        public void OnGet(long id)
         {
 	        EmployeeViewModel = new();
 	        EmployeeViewModel.Employee = EmployeesRepository.GetEmployeeById(id);
@@ -37,7 +37,7 @@ namespace WebApp.Pages.Employees
 	        return RedirectToPage("Index");
         }
 
-        public IActionResult OnPostDeleteEmployee(int id)
+        public IActionResult OnPostDeleteEmployee(long id)
         {
 	        var employee = EmployeesRepository.GetEmployeeById(id);
 	        if (employee == null)

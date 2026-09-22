@@ -21,7 +21,7 @@ namespace WebApp.Repositories
 			new Employee(12, "Isabelle Nguyen", "Technician", 57000, 3, "isabellenguyen@company.com"),
 		};
 
-		public static List<Employee> GetEmployees(string? filter = null, int? departmentId = null)
+		public static List<Employee> GetEmployees(string? filter = null, long? departmentId = null)
 		{
 			// This may look like a bad practice, but since we're using an in-memory repository for now, it is ok to load the department object
 			// for each employee. We'll change this later.
@@ -42,7 +42,7 @@ namespace WebApp.Repositories
 			return _Employees;
 		}
 
-		public static Employee? GetEmployeeById(int id)
+		public static Employee? GetEmployeeById(long id)
 		{
 			return _Employees.FirstOrDefault(x => x.Id == id);
 		}
@@ -51,7 +51,7 @@ namespace WebApp.Repositories
 		{
 			if (employee != null)
 			{
-				int maxId = _Employees.Max(x => x.Id);
+				long maxId = _Employees.Max(x => x.Id);
 				employee.Id = maxId + 1;
 				_Employees.Add(employee);
 			}

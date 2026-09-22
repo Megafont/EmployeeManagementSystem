@@ -27,7 +27,7 @@ namespace WebApp.DemoControllers
 	//	//[Route("/departments")] // This attribute is used when you do not specify the route in the Http... attribute above.
 	//	// This attribute, when applied to the controller class, specifies the route prefix for all endpoints in this controller.
 	//	// So [Route("/api")] applied to the class prepends all endpoints' paths with "/api", providing a way to reduce duplicate code.
-	//	public string GetDepartmentById(int id)
+	//	public string GetDepartmentById(long id)
 	//	{
 	//		return $"Department info: {id}";
 	//	}

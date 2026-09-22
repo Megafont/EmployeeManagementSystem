@@ -23,7 +23,7 @@ namespace WebApp.Repositories
 	        return _Departments.Where(x => x.Name != null && x.Name.ToLower().Contains(filter.ToLower())).ToList();
         }
 
-        public static Department? GetDepartmentById(int id)
+        public static Department? GetDepartmentById(long id)
         {
             return _Departments.FirstOrDefault(x => x.Id == id);
         }
@@ -34,7 +34,7 @@ namespace WebApp.Repositories
             {
                 if (_Departments.Any())
                 {
-                    int maxId = _Departments.Max(x => x.Id);
+                    long maxId = _Departments.Max(x => x.Id);
                     Department.Id = maxId + 1;
                 }
                 else

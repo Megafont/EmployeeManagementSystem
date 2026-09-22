@@ -26,7 +26,7 @@ namespace WebApp.Pages.Employees
 	        return ViewComponent("EmployeeList", new { filter });
         }
 
-        public IActionResult OnPostDeleteEmployee(int id)
+        public IActionResult OnPostDeleteEmployee(long id)
         {
 	        Employee employee = EmployeesRepository.GetEmployeeById(id);
 

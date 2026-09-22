@@ -5,7 +5,7 @@ namespace WebApp.Pages.Shared.Components.EmployeeList
 {
 	public class EmployeeListViewComponent : ViewComponent
 	{
-		public IViewComponentResult Invoke(string? filter, int? departmentId)
+		public IViewComponentResult Invoke(string? filter, long? departmentId)
 		{
 			return View(EmployeesRepository.GetEmployees(filter, departmentId));
 		}

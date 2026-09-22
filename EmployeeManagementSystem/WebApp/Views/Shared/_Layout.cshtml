@@ -28,6 +28,16 @@
         <!--This script tag is from www.GetBootstrap.com on the downloads page. It is needed for the navbar's dropdown menu to work. The navbar is also from this website.-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
         
+        <!--IMPORTANT: The following three scripts are here to enable client-side validation of our form fields.
+                        The first one (jquery.min.js) was originally version 4.0.0, but I had to downgrade it, as the other two below it are not compatible
+                        with that version so the client-side validation the edit department/edit employee pages wasn't working.
+                        These three scripts must be added in this order, as each one depends on the ones before it.
+                        To get these script blocks, got to https://cdnjs.com/, type the name of the script you want in the search box, and press enter.
+                        Click on the name of the script you want to go to its page. In here, click on the one with the "min" suffix since we're using the min versions here.-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.22.1/jquery.validate.js" integrity="sha512-iezEbMG8mJ4LzEBBPJSgA9C3OmBvM6jYSMZSgjgizvwZoInnfn5leiwOj4LRbDQwD3pOI/KVrd7SPOD5VQIGUA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js" integrity="sha512-xq+Vm8jC94ynOikewaQXMEkJIOBp7iArs3IhFWSWdRT3Pq8wFz46p+ZDFAR7kHnSFf+zUv52B3prRYnbDRdgog==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
         @RenderSection("scripts", false)
 
         </body>

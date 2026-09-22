@@ -10,7 +10,7 @@ namespace WebApp.Models
             
         }
 
-        public Department(int id, string name, string? description = "", string? email = "")
+        public Department(long id, string name, string? description = "", string? email = "")
         {
             this.Id = id;
             this.Name = name;
@@ -21,8 +21,10 @@ namespace WebApp.Models
         // Since we've updated our HTML input tags to use the asp-for attribute, we need to add this HiddenInput attribute.
         // That way it nose Id should be a hidden field on the HTML form.
         [HiddenInput]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
+        // NOTE: For the [Required] attribute and all validation attributes like [StringLength], you can also override the default error message with your own
+        //       by specifying a value for the ErrorMessage param, like this: [StringLength(500, ErrorMessage="This is my custom error message")]
         [Required]
         public string? Name { get; set; }
 

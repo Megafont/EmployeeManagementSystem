@@ -4,6 +4,12 @@
 <form method="post" 
       asp-controller="Departments"
       asp-action="@ViewBag.Action" >
+    
+
+    <!--NOTE: Unlike the asp-validation-for tag helpers used above, the asp-validation-summary will not display until the user submits the form.
+    this is its default behavior.-->
+    <div asp-validation-summary="All" class="text-danger"></div>
+
 
     @if (ViewBag.Action == "edit")
     {
@@ -11,7 +17,8 @@
             <input type="hidden" name="Id" value="@Model.Id"/> -->
         <input asp-for="Id"/>
     }
-
+    
+    
     <div class="row mb-3">
         <div class="col-2">
             <!-- This line was changed to use the asp-for attribute.
@@ -22,6 +29,8 @@
             <!-- This line was changed to replace the type, name, and value attributes with a single asp-for attribute.
                 <input type="text" name="Name" value="@Model.Name" class="form-control"/> -->
             <input class="form-control" asp-for="Name" />
+            <!--This span displays a validation message if this field does not contain a valid value. This client-side validation won't work without the three jquery script tags we added at the bottom of Views/Shared/_Layout.cshtml-->
+            <span class="text-danger" asp-validation-for="Name"></span>
         </div>
     </div>
 
@@ -35,6 +44,9 @@
             <!-- This line was changed to replace the type, name, and value attributes with a single asp-for attribute.
                 <input type="text" name="Description" value="@Model.Description" class="form-control"/> -->
             <input class="form-control" asp-for="Description">
+            <!--This span displays a validation message if this field does not contain a valid value. This client-side validation won't work without the three jquery script tags we added at the bottom of Views/Shared/_Layout.cshtml-->
+            <span class="text-danger" asp-validation-for="Description"></span>
+
         </div>
     </div>
     
@@ -44,6 +56,8 @@
         </div>
         <div class="col-6">
             <input class="form-control" asp-for="Email" />
+            <!--This span displays a validation message if this field does not contain a valid value. This client-side validation won't work without the three jquery script tags we added at the bottom of Views/Shared/_Layout.cshtml-->
+            <span class="text-danger" asp-validation-for=Email></span>
         </div>
     </div>
 
@@ -53,7 +67,7 @@
         </div>
         <div class="col-1">
             <!-- This line was replaced to use asp.net tag helpers instead to auto-generate the link address
-                <a class="btn btn-secondary" href="/departments">Cancel</a> -->
+            <a class="btn btn-secondary" href="/departments">Cancel</a> -->
             <a class="btn btn-primary"
                asp-controller="Departments"
                asp-action="Index">Cancel</a>
@@ -62,7 +76,7 @@
             @if (ViewBag.Action == "edit")
             {
                 <!-- This line was replaced to use asp.net tag helpers instead to auto-generate the link address
-                    <a href="/employees/departmentemployees/@Model.Id" class ="btn btn-link">Check Employees</a> -->
+                <a href="/employees/departmentemployees/@Model.Id" class ="btn btn-link">Check Employees</a> -->
                 <a class="btn btn-link"
                    asp-page="/employees/departmentemployees"
                    asp-route-departmentId="@Model.Id">Check Employees</a>
@@ -70,6 +84,7 @@
         </div>
 
     </div>
+
 </form>
 
 <br>

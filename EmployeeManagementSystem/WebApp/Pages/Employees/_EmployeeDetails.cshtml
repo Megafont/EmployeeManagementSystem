@@ -1,4 +1,5 @@
 ﻿
+@using Microsoft.AspNetCore.Mvc.Formatters
 @model EmployeeViewModel
 
 @if (Model != null && Model.Employee != null)
@@ -14,6 +15,12 @@
         <!--This adds an anti-forgery token that ensures a post from this form actually came from us and not a hacker somewhere.-->
         @Html.AntiForgeryToken()
         
+
+        <!--NOTE: Unlike the asp-validation-for tag helpers used above, the asp-validation-summary will not display until the user submits the form.
+        this is its default behavior.-->
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+
         <!-- This line was changed to replace the type, name, and value attributes with a single asp-for attribute.
             <input type="hidden" name="Employee.Id" value="@Model.Employee.Id" /> -->
         <input type="hidden" asp-for="Employee.Id" />
@@ -28,6 +35,8 @@
                 <!-- This line was changed to replace the type, name, and value attributes with a single asp-for attribute.
                     <input type="text" name="Employee.Name" value="@Model.Employee.Name" class="form-control"/> -->
                 <input class="form-control" asp-for="Employee.Name"/> 
+                <!--This span displays a validation message if this field does not contain a valid value. This client-side validation won't work without the three jquery script tags we added at the bottom of Views/Shared/_Layout.cshtml-->
+                <span class="text-danger" asp-validation-for="Employee.Name"></span>
             </div>
         </div>
 
@@ -41,6 +50,9 @@
                 <!-- This line was changed to replace the type, name, and value attributes with a single asp-for attribute.
                     <input type="text" name="Employee.Position" value="@Model.Employee.Position" class="form-control"/> -->
                 <input class="form-control" asp-for="Employee.Position"/>
+                <!--This span displays a validation message if this field does not contain a valid value. This client-side validation won't work without the three jquery script tags we added at the bottom of Views/Shared/_Layout.cshtml-->
+                <span class="text-danger" asp-validation-for="Employee.Position"></span>
+
             </div>
         </div>
         
@@ -54,6 +66,8 @@
                 <!-- This line was changed to replace the type, name, and value attributes with a single asp-for attribute.
                     <input type="number" name="Employee.Salary" value="@Model.Employee.Salary" class="form-control"/> -->
                 <input class="form-control" asp-for="Employee.Salary"/>
+                <!--This span displays a validation message if this field does not contain a valid value. This client-side validation won't work without the three jquery script tags we added at the bottom of Views/Shared/_Layout.cshtml-->
+                <span class="text-danger" asp-validation-for="Employee.Salary"></span>
             </div>
         </div>
 
@@ -67,41 +81,24 @@
     
                 <!-- This line was changed to use the asp-for attribute.
                 <select name="Employee.DepartmentId" class="form-control"> -->
-                <select class="form-control" asp-for="Employee.DepartmentId">
-
-                    @if (Model.Departments != null)
+                <select class="form-control"
+                        asp-for="Employee.DepartmentId"
+                        asp-items='Model.Departments.Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString(), Selected = (ViewBag.Action == "edit" && x.Id == Model.Employee.DepartmentId) })'>
+                    
+                    <!--The options added by the add-items tag helper above will be added after this code runs so this item will be the first in the list.-->
+                    @if (ViewBag.Action == "create")
                     {
-                        @if (ViewBag.Action == "create")
-                        {
-                            <option selected value="0">-- Please Select --</option>
-                        }
-                        else
-                        {
-                            <option value="0">-- Please Select --</option>
-                        }
-
-
-                        @foreach (var department in Model.Departments)
-                        {
-                            if (ViewBag.Action == "edit")
-                            {
-                                if (department.Id == Model.Employee.DepartmentId)
-                                {
-                                    <option selected value="@department.Id">@department.Name</option>
-                                }
-                                else
-                                {
-                                    <option value="@department.Id">@department.Name</option>
-                                }
-                            }
-                            else
-                            {
-                                <option value="@department.Id">@department.Name</option>
-                            }
-                        }
+                        <option selected value="0">-- Please Select --</option>
+                    }
+                    else
+                    {
+                        <option value="0">-- Please Select --</option>
                     }
 
                 </select>
+                <!--This span displays a validation message if this field does not contain a valid value. This client-side validation won't work without the three jquery script tags we added at the bottom of Views/Shared/_Layout.cshtml-->
+                <span class="text-danger" asp-validation-for="Employee.DepartmentId"></span>
+ 
             </div>
         </div>
 
@@ -111,6 +108,8 @@
             </div>
             <div class="col-6">
                 <input class="form-control" asp-for="Employee.Email" />
+                <!--This span displays a validation message if this field does not contain a valid value. This client-side validation won't work without the three jquery script tags we added at the bottom of Views/Shared/_Layout.cshtml-->
+                <span class="text-danger" asp-validation-for="Employee.Email"></span>
             </div>
         </div>
 

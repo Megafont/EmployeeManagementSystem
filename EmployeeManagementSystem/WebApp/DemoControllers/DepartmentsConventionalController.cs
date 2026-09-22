@@ -56,7 +56,7 @@ namespace WebApp.DemoControllers
 
 		// The conventional way to implement a GET endpoint that gets an item by Id.
 		[HttpGet]
-		public IActionResult Details(int? id)
+		public IActionResult Details(long? id)
 		{
 			// REDIRECT RESULTS
 			// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -131,7 +131,7 @@ namespace WebApp.DemoControllers
 		//			  When the user clicks that button, it will generate an HttpPost request, so we'd actually use the
 		//			  [HttpPost] attribute here in this case.
 		[HttpDelete]
-		public string Delete(int? id)
+		public string Delete(long? id)
 		{
 			return $"Deleting department: {id}";
 		}
@@ -141,7 +141,7 @@ namespace WebApp.DemoControllers
 		//			  When the user clicks that button, it will generate an HttpPost request, so we'd actually use the
 		//			  [HttpPost] attribute here in this case.
 		[HttpPut]
-		public string Edit(int? id)
+		public string Edit(long? id)
 		{
 			return $"Editing department: {id}";
 		}
