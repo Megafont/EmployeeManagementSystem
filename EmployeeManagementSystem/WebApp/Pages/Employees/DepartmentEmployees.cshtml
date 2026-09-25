@@ -20,6 +20,17 @@
     </tr>
     </thead>
     <tbody id="employee-list">
-        @await Component.InvokeAsync("EmployeeList", new { filter = "", departmentId = Model.DepartmentId })
+
+    <!-- 
+    This line is commented out, as we replaced it with the line below that does the same thing but via tag helpers instead. 
+
+    NOTE: await was prepended with the at symbol before, as it is a directive, but then it won't consider that line to be commented out for some reason, so I removed it.
+    await Component.InvokeAsync("EmployeeList", new { filter = "", departmentId = Model.DepartmentId })
+            
+    NOTE: The line below is referencing our _EmployeeList view component, which is in Pages/Shared/Components/EmployeeList.
+    This requires the line we added in Pages/Shared/_ViewImports.cshtml (@addTagHelper *, WebApp) so the tag helper can find the _EmployeeList view component.
+    -->
+    <vc:employee-list filter="" department-id="@Model.DepartmentId"></vc:employee-list>
+
     </tbody>
 </table>

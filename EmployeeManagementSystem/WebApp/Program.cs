@@ -13,6 +13,8 @@ builder.Services.AddRazorPages();
 var app = builder.Build();
 
 // This middleware allows us to use static files in the wwwroot folder.
+// Another newer middleware we could use here instead is app.MapStaticFiles(). This one enables cache and adding version number to the query string automatically.
+// So it's a bit easier than doing it explicitly like we did by adding the asp-append-version attribute in Views/Home/Index.cshtml.
 app.UseStaticFiles(new StaticFileOptions 
 {
 	OnPrepareResponse = ctx =>

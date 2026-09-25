@@ -6,7 +6,14 @@
     <h3>Employees</h3>    
 }
 
-@await Html.PartialAsync("_SearchBar")
+
+<!-- 
+This line is commented out, as we replaced it with the line below that does the same thing but via tag helpers instead. 
+NOTE: await was prepended with the at symbol before, as it is a directive, but then it won't consider that line to be commented out for some reason, so I removed it.
+await Html.PartialAsync("_SearchBar")
+-->
+<partial name="_SearchBar" />
+
 
 <table class="table table-striped">
     <thead>
