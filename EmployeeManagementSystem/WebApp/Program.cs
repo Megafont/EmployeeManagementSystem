@@ -1,3 +1,5 @@
+using WebApp.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // This service is needed for app.MapControllers() to work below.
@@ -8,6 +10,10 @@ builder.Services.AddControllersWithViews();
 
 // This service is needed for the app.MapRazorPages() call below to work.
 builder.Services.AddRazorPages();
+
+
+builder.Services.AddSingleton<IDepartmentsRepository, DepartmentsRepository>();
+builder.Services.AddSingleton<IEmployeesRepository, EmployeesRepository>();
 
 
 var app = builder.Build();

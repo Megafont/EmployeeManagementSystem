@@ -7,7 +7,13 @@ namespace WebApp.Pages.Employees
 {
     public class IndexModel : PageModel
     {
-        public List<Employee>? Employees { get; set; }
+	    private readonly IEmployeesRepository _employeesRepository;
+	    public List<Employee>? Employees { get; set; }
+
+        public IndexModel(IEmployeesRepository employeesRepository)
+        {
+	        _employeesRepository = employeesRepository;
+        }
 
         public void OnGet()
         {
@@ -28,10 +34,10 @@ namespace WebApp.Pages.Employees
 
         public IActionResult OnPostDeleteEmployee(long id)
         {
-	        Employee employee = EmployeesRepository.GetEmployeeById(id);
+	        Employee employee = _employeesRepository.GetEmployeeById(id);
 
             if (employee != null)
-				EmployeesRepository.DeleteEmployee(employee);
+				_employeesRepository.DeleteEmployee(employee);
 
             return RedirectToPage();
         }

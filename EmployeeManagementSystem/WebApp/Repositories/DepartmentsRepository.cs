@@ -5,9 +5,9 @@ using WebApp.Models;
 
 namespace WebApp.Repositories
 {
-    public static class DepartmentsRepository
+    public class DepartmentsRepository : IDepartmentsRepository
     {
-        private static List<Department> _Departments = new List<Department>
+        private List<Department> _Departments = new List<Department>
         {
             new Department(1, "Sales", "Sales Department", "sales@company.com"),
             new Department(2, "Engineering", "Engineering Department", "engineering@company.com"),
@@ -15,7 +15,7 @@ namespace WebApp.Repositories
             new Department(4, "IT", "IT Department", "it@company.com"),
         };
 
-        public static List<Department> GetDepartments(string? filter = null)
+        public List<Department> GetDepartments(string? filter = null)
         {
 	        if (string.IsNullOrWhiteSpace(filter))
 		        return _Departments;
@@ -23,12 +23,12 @@ namespace WebApp.Repositories
 	        return _Departments.Where(x => x.Name != null && x.Name.ToLower().Contains(filter.ToLower())).ToList();
         }
 
-        public static Department? GetDepartmentById(long id)
+        public Department? GetDepartmentById(long id)
         {
             return _Departments.FirstOrDefault(x => x.Id == id);
         }
 
-        public static void AddDepartment(Department? Department)
+        public void AddDepartment(Department? Department)
         {
             if (Department is not null)
             {
@@ -46,7 +46,7 @@ namespace WebApp.Repositories
             }
         }
 
-        public static bool UpdateDepartment(Department? Department)
+        public bool UpdateDepartment(Department? Department)
         {
             if (Department is not null)
             {
@@ -64,7 +64,7 @@ namespace WebApp.Repositories
             return false;
         }
 
-        public static bool DeleteDepartment(Department? Department)
+        public bool DeleteDepartment(Department? Department)
         {
             if (Department is not null)
             {

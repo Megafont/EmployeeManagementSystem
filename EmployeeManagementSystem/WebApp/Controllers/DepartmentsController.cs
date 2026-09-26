@@ -9,6 +9,13 @@ namespace WebApp.Controllers
 {
 	public class DepartmentsController : Controller
 	{
+		private readonly IDepartmentsRepository _departmentsRepository;
+
+		public DepartmentsController(IDepartmentsRepository departmentsRepository)
+		{
+			_departmentsRepository = departmentsRepository;
+		}
+
 		[HttpGet]
 		public IActionResult Index()
 		{
@@ -43,7 +50,7 @@ namespace WebApp.Controllers
 		[HttpGet]
 		public IActionResult Details(long id)
 		{
-			var department = DepartmentsRepository.GetDepartmentById(id);
+			var department = _departmentsRepository.GetDepartmentById(id);
 			if (department == null)
 			{
 				return View("Error", new List<string> { "Department not found!" });
@@ -67,7 +74,7 @@ namespace WebApp.Controllers
 			}
 
 
-			DepartmentsRepository.UpdateDepartment(department);
+			_departmentsRepository.UpdateDepartment(department);
 
 			// We are not specifying the controller name here, since we are redirecting to an endpoint in the same controller, so it is not necessary.
 			return RedirectToAction(nameof(Index));
@@ -92,7 +99,7 @@ namespace WebApp.Controllers
 				return View("Error", ModelStateHelper.GetErrors(ModelState));
 			}
 
-			DepartmentsRepository.AddDepartment(department);
+			_departmentsRepository.AddDepartment(department);
 
 			// We are not specifying the controller name here, since we are redirecting to an endpoint in the same controller, so it is not necessary.
 			return RedirectToAction(nameof(Index));
@@ -101,7 +108,7 @@ namespace WebApp.Controllers
 		[HttpPost] // This is Post instead of Delete because HTML forms only support Get and Post.
 		public IActionResult Delete(long id)
 		{
-			Department department = DepartmentsRepository.GetDepartmentById(id);
+			Department department = _departmentsRepository.GetDepartmentById(id);
 
 			if (!ModelState.IsValid)
 			{
@@ -111,7 +118,7 @@ namespace WebApp.Controllers
 			}
 
 
-			DepartmentsRepository.DeleteDepartment(department);
+			_departmentsRepository.DeleteDepartment(department);
 
 			return RedirectToAction(nameof(Index));
 		}

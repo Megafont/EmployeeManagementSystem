@@ -28,7 +28,7 @@
     await Component.InvokeAsync("EmployeeList", new { filter = "", departmentId = Model.DepartmentId })
             
     NOTE: The line below is referencing our _EmployeeList view component, which is in Pages/Shared/Components/EmployeeList.
-    This requires the line we added in Pages/Shared/_ViewImports.cshtml (@addTagHelper *, WebApp) so the tag helper can find the _EmployeeList view component.
+    This requires the line we added in Pages/Shared/_ViewImports.cshtml (addTagHelper *, WebApp) so the tag helper can find the _EmployeeList view component.
     -->
     <vc:employee-list filter="" department-id="@Model.DepartmentId"></vc:employee-list>
 

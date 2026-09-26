@@ -16,7 +16,7 @@
             <a href="/departments/details/@Model.Id">@Model.Name</a> -->
             <a asp-controller="Departments"
                asp-action="Details"
-               asp-route-id="@Model.DepartmentId">@DepartmentsRepository.GetDepartmentById(Model.DepartmentId)?.Name</a>
+               asp-route-id="@Model.DepartmentId">@Model.Department?.Name</a>
         </td>
         <td>@Model.Email</td>
         <td>

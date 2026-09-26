@@ -3,9 +3,11 @@ using WebApp.Models;
 
 namespace WebApp.Repositories
 {
-	public class EmployeesRepository
+	public class EmployeesRepository : IEmployeesRepository
 	{
-		private static List<Employee> _Employees = new List<Employee>
+		private readonly IDepartmentsRepository _departmentsRepository;
+
+		private List<Employee> _Employees = new List<Employee>
 		{
 			new Employee(1, "John Doe", "Engineer", 60000, 1, "johndoe@company.com"),
 			new Employee(2, "Jane Smith", "Manager", 75000, 1, "janesmith@company.com"),
@@ -21,13 +23,18 @@ namespace WebApp.Repositories
 			new Employee(12, "Isabelle Nguyen", "Technician", 57000, 3, "isabellenguyen@company.com"),
 		};
 
-		public static List<Employee> GetEmployees(string? filter = null, long? departmentId = null)
+		public EmployeesRepository(IDepartmentsRepository departmentsRepository)
+		{
+			_departmentsRepository = departmentsRepository;
+		}
+
+		public List<Employee> GetEmployees(string? filter = null, long? departmentId = null)
 		{
 			// This may look like a bad practice, but since we're using an in-memory repository for now, it is ok to load the department object
 			// for each employee. We'll change this later.
 			foreach (Employee employee in _Employees)
 			{
-				employee.Department = DepartmentsRepository.GetDepartmentById(employee.DepartmentId);
+				employee.Department = _departmentsRepository.GetDepartmentById(employee.DepartmentId);
 			}
 
 			if (departmentId.HasValue)
@@ -42,12 +49,12 @@ namespace WebApp.Repositories
 			return _Employees;
 		}
 
-		public static Employee? GetEmployeeById(long id)
+		public Employee? GetEmployeeById(long id)
 		{
 			return _Employees.FirstOrDefault(x => x.Id == id);
 		}
 
-		public static void AddEmployee(Employee? employee)
+		public void AddEmployee(Employee? employee)
 		{
 			if (employee != null)
 			{
@@ -57,7 +64,7 @@ namespace WebApp.Repositories
 			}
 		}
 
-		public static bool UpdateEmployee(Employee? employee)
+		public bool UpdateEmployee(Employee? employee)
 		{
 			if (employee != null)
 			{
@@ -77,7 +84,7 @@ namespace WebApp.Repositories
 			return false;
 		}
 
-		public static bool DeleteEmployee(Employee? employee)
+		public bool DeleteEmployee(Employee? employee)
 		{
 			if (employee != null)
 			{
